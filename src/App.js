@@ -1,4 +1,5 @@
 import Button from '@mui/material/Button'
+import React from "react";
 import './App.css';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -16,6 +17,20 @@ import Avatar from '@mui/material/Avatar';
 
 
 function App() {
+  const themeLight = createTheme({
+    palette: {
+      palette: {
+        mode: 'light',
+      }
+    }
+  });
+  
+  const themeDark = createTheme({
+    palette: {
+      mode: 'dark',
+    }
+  });
+
   function Copyright(props) {
     return (
       <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -28,9 +43,8 @@ function App() {
       </Typography>
     );
   }
-  
-  const theme = createTheme();
-  
+
+  const [light, setLight] = React.useState(false);
   const handleSubmit = (event) => {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
@@ -40,9 +54,9 @@ function App() {
         password: data.get('password'),
       });
     };
-  
+    
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={light ?  themeLight : themeDark}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box
